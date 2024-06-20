@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "../components/Spinner";
+import React, { useEffect, useState } from "react";
+import { MdOutlineAddBox } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
-import BooksTable from "../components/home/BooksTable";
+import Spinner from "../components/Spinner";
 import BooksCard from "../components/home/BooksCard";
+import BooksTable from "../components/home/BooksTable";
+import { serverURL } from "../config";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -16,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/books")
+      .get(`${serverURL}/books`)
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);

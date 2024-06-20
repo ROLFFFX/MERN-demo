@@ -4,6 +4,7 @@ import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { serverURL } from '../config';
 
 const CreateBooks = () => {
   const [title, setTitle] = useState('');
@@ -21,16 +22,16 @@ const CreateBooks = () => {
     };
     setLoading(true);
     axios
-      .post('http://localhost:5555/books', data)
+      .post(`${serverURL}/books`, data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Book Created successfully', { variant: 'success' });
-        navigate('/');
+        enqueueSnackbar("Book Created successfully", { variant: "success" });
+        navigate("/");
       })
       .catch((error) => {
         setLoading(false);
         // alert('An error happened. Please Chack console');
-        enqueueSnackbar('Error', { variant: 'error' });
+        enqueueSnackbar("Error", { variant: "error" });
         console.log(error);
       });
   };
